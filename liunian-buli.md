@@ -88,5 +88,5 @@ ACCA 一次全球第一都没刷到，痛失 200 磅奖金。
 ---
 <br>
 <div align="center">
-  <a href="index.md">🔙 返回老阿姨更年期手记首页</a>
+  <a href="/">🔙 返回老阿姨更年期手记首页</a>
 </div>
