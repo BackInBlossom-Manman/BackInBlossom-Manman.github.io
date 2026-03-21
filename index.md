@@ -27,6 +27,7 @@
 * [惠新东街的青春往事：千禧年初，老阿姨聊过的那些男网友](huixin-dongjie.md)
 * [金陵怀古 (命运的齿轮、时代风口与屠城诛心)](jinling-huaigu.md)
 * [为赋新词强说愁，英雄难过 VISA 关 (惠园旧梦与旅行恐惧症)](visa-guan.md)
+* [从重度恋爱脑到“修无情道”：更年期老阿姨的作精少女黑历史](zuojing-shaonv.md)
 
 ### 卷三：职场渡劫与算账日常 (Workplace & Finance)
 * [南都旧事 (大锅饭职场、公文小吏与上首惊魂)](nandu-jiushi.md)
@@ -50,6 +51,11 @@
 * [遇张岱的初冬都柏林 (四百年的时空对饮与 ACCA 裸奔轶事)](yudao-zhangdai.md)
 * [明月夜，短松冈 (寻同道中人，终见琉璃镜湖)](mingyueye.md)
 * [黄粱一枕 · 梦境篇 (破瓶的苦醋与离别苦)](huangliang-yizhen.md)
+
+### 特辑：镇阁之宝与赛博算力 (Academic Portfolio & Data Analytics)
+* [**【大论文全卷】Quantifying the Impact of Weather-Related Risk on Agricultural and Financial Systems**](dissertation.md)
+  *(University of Edinburgh Business School | MSc in Data and Decision Analytics | 16,225 Words)*
+  > *注：内含 XGBoost 与 SHAP 算法对极端天气与全球金融市场非线性冲击的量化研判全卷，全英文高能预警。*
 
 ---
 <br>
