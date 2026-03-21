@@ -21,12 +21,14 @@ This model serves as a benchmark; the key underlying assumption of a linear rela
 | Rice | 0.21 | 0.13 |
 | Soybean | -0.44 | -0.02 |
 | Maize | 0.21 | 0.13 |
+
 *Table 1: Performance of the PanelOLS (Panel Fixed-Effects Regression) Linear Benchmark Model. This table compares the coefficient of determination (R²) of the linear model for four crops, contrasting the performance using a complete set of variables with that of a feature set selected by the Lasso method.*
 
 **Specification Comparison: Same-Year vs. Cross-Year XGBoost Models**
 Due to the failure of the linear model, we will conduct an advanced non-linear model: the XGBoost algorithm (a machine learning method) to test the non-linear relationships. This section implements two model strategies. The core difference between these two models is that the cross-year model introduced the previous year’s weather variables as features for predicting the target variable. In contrast, the same-year model only includes the current year's weather matrix as input variables.
 
 **Final Model Performance Summary (Default Params-Same Year Model)**
+
 | Crop | Best Harvest Period | Final R² | Final MSE | Final MAE |
 | :--- | :--- | :--- | :--- | :--- |
 | Maize | 20 | 0.75 | 3.41 | 1.44 |
@@ -35,12 +37,14 @@ Due to the failure of the linear model, we will conduct an advanced non-linear m
 | Soybean | 20 | 0.77 | 0.27 | 0.39 |
 
 **Final Model Performance Summary (Cross-Year, Default Params)**
+
 | Crop | Best Harvest Period | Final R² | Final MSE | Final MAE |
 | :--- | :--- | :--- | :--- | :--- |
 | Maize | 16 | 0.81 | 2.49 | 1.22 |
 | Wheat | 15 | 0.74 | 1.14 | 0.87 |
 | Rice | 18 | 0.78 | 4.03 | 1.33 |
 | Soybean | 13 | 0.75 | 0.29 | 0.44 |
+
 *Table 2: Performance Summary and Comparison of XGBoost Model Specifications. The tables display the final performance metrics, including R², MSE, and MAE, for two XGBoost model strategies: the "Same-Year Model" (top) and the "Cross-Year Model" (bottom). Metrics computed on the 2016 hold‑out year; training years: 1990–2015; no hyper‑parameter tuning (“default params”).*
 
 According to the above performance evaluation matrix, both model strategies exhibit significantly better performance compared to the linear model. Furthermore, when comparing the two methods, we can conclude that for rice and soybeans, the same-year model performs better, with a higher R² and lower MSE & MAE; however, for maize and wheat, the cross-year model yields more advanced results based on the assessment parameters. These performance indicators suggest, at the Macro-level, the variance of the legacy effect and the same-year sensitivity of weather conditions on specific crops. While a formal statistical test for the significance of these differences was not conducted, these performance indicators provide a clear rationale for model selection for the subsequent attribution analysis.
@@ -78,6 +82,7 @@ The SHAP interaction values reveal a synergistic pattern learned by the model, w
 | period22_coldwave_index_lag1 | 0.130784 | period12_coldwave_index | 0.145166 | -0.104930 |
 | period23_drought_index_lag1 | 0.206431 | period18_sunshine_index_lag1 | 0.048358 | 0.029040 |
 | period23_drought_index_lag1 | 0.206431 | period14_heatwave_index | -0.062695 | -0.003563 |
+
 *Table 3: Summary of SHAP interaction values for the Maize model. The table lists the mean SHAP values (main effects) and mean SHAP interaction values for key feature pairs. These are used to quantify patterns such as synergistic ("1 + 1 > 2") effects on the model's predictions.*
 
 As shown below, the wheat interaction value table suggests a buffer-like effect learned by the model for the compound against two adverse events. The interaction effect of the period 05 storm (SHAP value: -0.034) and the period 02 drought (SHAP value: -0.029) (two model input features) has a positive interaction value (0.026), which suggests the spring storm and the prior period drought will buffer their individual effects for the model prediction value. The adverse impact of the final negative influence will be less than the simple sum of each negative implication.
@@ -88,6 +93,7 @@ As shown below, the wheat interaction value table suggests a buffer-like effect 
 | period01_drought_index | -0.018858 | period14_drought_index | -0.060327 | 0.012747 |
 | period05_storm_index | -0.034252 | period02_drought_index | -0.028724 | 0.026072 |
 | period23_coldwave_index_lag1 | 0.027623 | period02_drought_index | -0.028724 | -0.005314 |
+
 *Table 4: Summary of SHAP interaction values for the Wheat model. The table lists the mean SHAP values (main effects) and mean SHAP interaction values for key feature pairs. These values are used to quantify patterns such as buffering effect on the model's predictions.*
 
 **Identifying Antagonistic & Diminishing Return Effects in the Model's Logic**
@@ -100,6 +106,7 @@ Another similar instance is illustrated in the soybean interaction value table b
 | period04_drought_index | -0.049738 | period11_coldwave_index | 0.008840 | -0.019536 |
 | period04_drought_index | -0.049738 | period10_coldwave_index | 0.062870 | 0.005346 |
 | period10_coldwave_index | 0.062870 | period15_heatwave_index | -0.002382 | 0.001111 |
+
 *Table 5: Summary of SHAP interaction values for the Soybean model. The table lists the mean SHAP values (main effects) and mean SHAP interaction values for key feature pairs. These values are used to quantify patterns such as antagonistic ("1 + 1 < 2") effect on the model's predictions.*
 
 **Asymmetric Moderation & "Switch-like" Mechanism**
@@ -188,6 +195,7 @@ Model performance metrics table:
 | XGBoost (Only Own Lags) | 41.72 | 5.04 | 1.42 | 0.79 | 0.94 |
 | XGBoost (Raw Climate Features + multi-lag) | 43.16 | 5.09 | 1.44 | 0.80 | 0.94 |
 | XGBoost Rolling Forward (with LEAD feature) | 43.68 | 5.13 | 1.45 | 0.81 | 0.94 |
+
 *Table 6: Model Performance Assessment and Comparison Matrix. This table compares the performance of various time series models (ARIMA, ARIMAX, and XGBoost) to justify the final model selection. While the pure ARIMA model shows the highest statistical performance, the XGBoost model was chosen for its superior ability to provide a robust framework for an explainable analysis of complex feature impacts.*
 
 *The Limitation of Pure ARIMA (best performance):* From the comparison of different model strategies, the best performing model is a purely autoregressive model, ARIMA, which only includes its lag term. This is mainly because the target variable (GSCI index) is a typical financial index that exhibits autocorrelation; the autoregressive model can effectively capture this characteristic. However, this chapter aims to answer the research questions raised in Chapter 2: how physical world shocks are transmitted to the financial market. A simple statistical model cannot explain or address this problem.
@@ -226,6 +234,7 @@ Compared to the Close_lag1 plot, this most influential weather feature has a sig
 | brazil_zone_1_soil | 0.0936 | 0.0636 | Southern Brazil Agricultural Core Region |
 | italy_zone_2_soil | 0.064 | 0.0614 | Southern Italy Mediterranean Coastal Agricultural Region |
 | brazil_zone_3_temp | 0.0785 | 0.0542 | Central-West Brazil Cerrado Tropical Savanna Core Agricultural Region |
+
 *Table 7: Comparison of Mean SHAP Values for Lead (Forecast) and Lag (Historical) Weather Features. This table quantifies the model's sensitivity to future versus past weather information. It shows that the model's predictions are generally more sensitive to future weather forecasts (lead features) than to past, occurred events (lag features), illustrating the market's forward-looking nature.*
 
 The average SHAP value for lead and lag weather features shows that the majority of wheat zones ‘predictions are more sensitive to future weather change, which can be estimated and released in weather prediction information; the financial market could quickly capture this change and reflect it as a price adjustment, which illustrates the market's efficiency and forward-looking nature.
@@ -272,7 +281,7 @@ This has also been demonstrated in the lowest price waterfall plot; the previous
 *Fig. 23: SHAP waterfall plot explaining a single prediction for a historical low point. The plot shows how the positive (red) and negative (blue) contributions from each feature shift the prediction from the base value (E[f(X)] = 354.157) to the final output value (f(x) = 232.099).*
 
 #### 5.2.3 Conclusion for the second model
-The core finding of the second model is the duality of drivers: the primary influencer is market inertia, which presents a long-term and smooth trend. In contrast, the second influencer -weather factors have significant seasonal characteristics, and the residual part dominates the change in this. This makes it more challenging to estimate and quantify the sudden shock of weather-related risk. Moreover, the weather factors also have complex, non-linear relationships and interactions, like those in the first model. Finally, the temperature of the U.S. Southern Great Plains wheat belt is the most influential weather factor, highlighting the importance of the USA's traditional wheat region for global wheat production and trade.
+The core finding of the second model is the duality of drivers: the primary influencer is market inertia, which presents a long-term and smooth trend. In contrast, the second influencer -weather factors have significant seasonal characteristics, and the residual part dominates the change in this. This makes it more challenging to estimate and quantify the sudden shock of weather-related risk. Moreover, the weather factors also have complex, non-linear relationships and interactions, like percentages in the first model. Finally, the temperature of the U.S. Southern Great Plains wheat belt is the most influential weather factor, highlighting the importance of the USA's traditional wheat region for global wheat production and trade.
 
 ---
 [ < Back to Chapter 4 ](chapter4.md) | [ Master Index ](dissertation.md) | [ Next: Chapter 6 > ](chapter6.md)
