@@ -31,8 +31,10 @@ We define the research scope as focusing on the most influential agricultural co
 
 **Defining Temporal Scope: Determining the Valid Growing Season**
 To ensure the following steps of constructing homogeneous spatial units are efficient and effective (using a valid time range for weather variables), this research adopts a widely accepted methodology to define the growing season: a daily average temperature above or below a threshold (5°C) for more than six consecutive days (Nolan & Flanagan, 2020). We apply a two-step methodology:
-* **The first step** involves using a 6-day centred moving average to smooth the daily temperature dataset, extracting the first date point of six consecutive days exceeding 5°C, and the last date point of moving below 5°C. 
-* **The second step** is to define the start and end months based on the calculated dates. For example, if the start date is after April 27, then the start month will be rounded up to May. This procedure ensures the use of K-means clustering for the climate-grain zones, utilising weather variables that precisely match the corresponding agricultural practices.
+
+The first step involves using a 6-day centred moving average to smooth the daily temperature dataset, extracting the first date point of six consecutive days exceeding 5°C, and the last date point of moving below 5°C. 
+
+The second step is to define the start and end months based on the calculated dates. For example, if the start date is after April 27, then the start month will be rounded up to May. This procedure ensures the use of K-means clustering for the climate-grain zones, utilising weather variables that precisely match the corresponding agricultural practices.
 
 **Defining Spatial Scope: Identifying Valid Agricultural Zones**
 This procedure was completed on the Google Earth Engine platform, utilising two widely used and accepted datasets: Köppen-Geiger Climate Classification and SPAM 2010 V2r0. The former is a climate classification map that divides the global regions into different climate pattern zones, and the latter is used to get global agricultural production spatial distribution data. 
@@ -58,9 +60,12 @@ This research applies the classic K-means clustering algorithm to divide the spa
 In K-means clustering, the value of K is a crucial parameter that needs to be preset to determine the optimal K objectively, rather than being subjectively chosen. This research designed and implemented a systematic assessment framework and a chosen algorithm based on a well-accepted principle, to quantify the model performance with different K values. We employ a suite of three complementary evaluation metrics: the Silhouette Coefficient (a higher value indicates better performance), the Davies-Bouldin Index (DBI), which yields a lower value for a better model result, and the Calinski-Harabasz Index (CH), where a higher value is preferable. Based on the normalisation of these three metrics, we calculated a compound score.
 
 The final choice of the best K is calculated by the three-layer algorithms below, which prioritise the quality and balance of the cluster:
-* **1) Primary Path:** The algorithm first filters the K value, which can result in the most balanced zones, with the most significant cluster proportion not exceeding 50%, on top of this, further selects the k with a well-structured cluster result, silhouette > 0.5, if multiple K meet this criteria, choose the value with highest silhouette, when silhouettes are the same, the composite score will make final decisions.
-* **2) First Fallback Path:** if for all the K which meet the balance criteria, but no one meets the 0.5 silhouette requirement, the best K will be selected by the highest silhouette, even if it is lower than 0.5, and the final choice is the same as determined by comparing the composite score.
-* **3) Second Fallback Path:** under specific situations, no K will meet the balance criteria; then the default choice will be the K with the highest composite score. This method ensures that, in every scenario, this algorithm will always return a robust K.
+
+**1) Primary Path:** The algorithm first filters the K value, which can result in the most balanced zones, with the most significant cluster proportion not exceeding 50%, on top of this, further selects the k with a well-structured cluster result, silhouette > 0.5, if multiple K meet this criteria, choose the value with highest silhouette, when silhouettes are the same, the composite score will make final decisions.
+
+**2) First Fallback Path:** if for all the K which meet the balance criteria, but no one meets the 0.5 silhouette requirement, the best K will be selected by the highest silhouette, even if it is lower than 0.5, and the final choice is the same as determined by comparing the composite score.
+
+**3) Second Fallback Path:** under specific situations, no K will meet the balance criteria; then the default choice will be the K with the highest composite score. This method ensures that, in every scenario, this algorithm will always return a robust K.
 
 #### 4.2.3 Stage 3: Abnormal Weather Event Quantification & Indexing
 
@@ -77,8 +82,9 @@ Then, the country-zone-level values (count of events, mean, maximum/minimum) wer
 **Construction of the Composite Index**
 Before implementing the PCA method to reduce the dimensions of the features, the table had 1613 rows (representing 13 countries with multiple zones spanning 27 years) and 508 columns (corresponding to seven categories of weather events, each with three statistics for 24 periods). To enhance the model's performance and improve its interpretability, a unique statistic is calculated for each event, fully reflecting the impact of that event, by utilising the two-step PCA method, which integrates the three statistical values: count, mean, and min/max. 
 
-* **1) First step:** We conduct normalisation and directional consistency (such as reversing the minimum value for cold wave, drought, and sunshine) to ensure the three statistics have the same directional impact on the final composite index and unify the scale of all input features. 
-* **2) Second step:** The PCA method has been utilised to reduce dimension, and the first principal component was used as the composite index, which explains the most significant variance in the dataset. This method effectively decreases the complexity of the model and reduces multicollinearity among features.
+**1) First step:** We conduct normalisation and directional consistency (such as reversing the minimum value for cold wave, drought, and sunshine) to ensure the three statistics have the same directional impact on the final composite index and unify the scale of all input features. 
+
+**2) Second step:** The PCA method has been utilised to reduce dimension, and the first principal component was used as the composite index, which explains the most significant variance in the dataset. This method effectively decreases the complexity of the model and reduces multicollinearity among features.
 
 When the three data processing stages are finished, the complex raw dataset of weather information has been transformed into a structured, information-intensive feature input for the first agricultural model building.
 
