@@ -32,12 +32,17 @@ This methodology has clear advantages for handling our dataset, which is charact
 ### 1.4 Dissertation Structure
 This research has six chapters; the allocation is as follows:
 
-* **Chapter 1: Introduction.** This chapter introduces the background, research questions, motivation, and objectives of this study. Additionally, this chapter presents the methodology and structure of this dissertation.
-* **Chapter 2: Literature Review.** This chapter systematically and critically reviews the related literature, identifies the gaps in current research, including methodology, non-linear relationships, integrated analysis, and explainability, and provides an entry point and Theoretical Fundamentals.
-* **Chapter 3: Research Design and Analysis Methodology.** This chapter discusses the two-stage model strategy and justifies the choice of XGBoost+SHAP values as a core analysis tool, describing how this method addresses the challenges caused by data characteristics and fills the research gap.
-* **Chapter 4: Data Preparation.** This chapter describes the data preparation process in detail, including the adoption of feature engineering methods for multi-source heterogeneous data (weather, yield raw data). Through the complex process of spatial-temporal standardisation, event quantisation, and index construction, a structured dataset is built for modelling. 
-* **Chapter 5: Model and Result Analysis.** This chapter presents and thoroughly investigates the analysis results of the two core models. The first model analysis will decompose agricultural vulnerability, revealing three fundamental principles: time sensitivities, condition dependence, and regional baseline. The second model bridges the gap between the physical world and the financial market, analysing the transmission mechanisms of weather-related risks' impact on the financial market.
-* **Chapter 6: Conclusion.** This chapter summarises the core findings and main contributions of this study, providing an honest critique of the study's limitations in methodology, data choice, and model design. Based on this, it proposes future research directions.
+**Chapter 1: Introduction.** This chapter introduces the background, research questions, motivation, and objectives of this study. Additionally, this chapter presents the methodology and structure of this dissertation.
+
+**Chapter 2: Literature Review.** This chapter systematically and critically reviews the related literature, identifies the gaps in current research, including methodology, non-linear relationships, integrated analysis, and explainability, and provides an entry point and Theoretical Fundamentals.
+
+**Chapter 3: Research Design and Analysis Methodology.** This chapter discusses the two-stage model strategy and justifies the choice of XGBoost+SHAP values as a core analysis tool, describing how this method addresses the challenges caused by data characteristics and fills the research gap.
+
+**Chapter 4: Data Preparation.** This chapter describes the data preparation process in detail, including the adoption of feature engineering methods for multi-source heterogeneous data (weather, yield raw data). Through the complex process of spatial-temporal standardisation, event quantisation, and index construction, a structured dataset is built for modelling. 
+
+**Chapter 5: Model and Result Analysis.** This chapter presents and thoroughly investigates the analysis results of the two core models. The first model analysis will decompose agricultural vulnerability, revealing three fundamental principles: time sensitivities, condition dependence, and regional baseline. The second model bridges the gap between the physical world and the financial market, analysing the transmission mechanisms of weather-related risks' impact on the financial market.
+
+**Chapter 6: Conclusion.** This chapter summarises the core findings and main contributions of this study, providing an honest critique of the study's limitations in methodology, data choice, and model design. Based on this, it proposes future research directions.
 
 ---
 [ < Back to Abstract ](abstract.md) | [ Master Index ](dissertation.md) | [ Next: Chapter 2 > ](chapter2.md)
